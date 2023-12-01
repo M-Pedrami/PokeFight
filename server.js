@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const PORT = 3001;
-const data = require("./data.json");
 const router = require("./routes/pokemonRoute")
 
-
+//Middleware to Parse the body of the payload
 app.use(express.json());
+
+
+//Paths to the router
 app.use('/pokemon', router);
 
 

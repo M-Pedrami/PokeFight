@@ -4,16 +4,16 @@ const router = express.Router();
 const data = require("../data.json");
 const pokemonController = require('../controllers/pokemonController')
 
-/* app.get("/pokemon/:id", (req, res) => {
-  const { id } = req.params;
-  const foundPokemon = data.filter(pokemon => pokemon.id === +id);
-  res.json(foundPokemon);
-}); */
+//const { getPokemons, getPokemon, getPokemonInfo} = require('../controllers/pokemonController')
+
+
 
 router.get("/", pokemonController.getPokemons);
 
 
 router.get("/:id", pokemonController.getPokemon);
+
+router.get('/:id/:info', pokemonController.getPokemonInfo  )
 
 //export default router(ES6);
 module.exports = router;

@@ -14,5 +14,8 @@ const getPokemon = (req, res) => {
   }
 };
 
-module.exports = {getPokemon, getPokemons}
+const getPokemonInfo = (req, res) => {
+  res.send("Test");
+};
 
+module.exports = { getPokemon, getPokemons, getPokemonInfo };
