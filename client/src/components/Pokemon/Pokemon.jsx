@@ -10,6 +10,7 @@ export default function Pokemon() {
   }
   const { id } = useParams();
   const [pokemon, setPokemon] = useState({});
+  const [picture, setPicture] = useState ({})
   const getPokemon = async (ID) => {
     try {
       const response = await axios.get(`http://localhost:3001/pokemon/${ID}`);
@@ -18,14 +19,27 @@ export default function Pokemon() {
       console.log("ERROR FROM getPokemon hook", error);
     }
   };
+
+  const getPokemonPicture = async (ID) => {
+    try {
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ID}`)
+      return response.data.sprites
+    } catch (error) {
+      console.log("ERROR FROM GETPOKEMONPICTURE", error)
+    }
+  }
   useEffect(() => {
     getPokemon(id)
       .then((res) => setPokemon(res))
       .catch((err) => console.log("ERROR INSIDE USEEFFECT", err));
+    getPokemonPicture(id)
+      .then(res=>setPicture(res))
+      .catch(err =>console.log("ERROR FROM USEEFFECT GETPICTURE", err))
   }, []);
-  console.log("POKEMON AFTER USEEFFECT", pokemon)
+  console.log("POKEMON AFTER USEEFFECT", pokemon, picture)
   return <div>
     <h1>Name : {pokemon.name?.japanese}</h1>
+    <img src={picture.front_shiny}/>
     <p>Type: {pokemon.type}</p>
     <p>Attack: {pokemon.base?.Attack}</p>
     <p>Defense: {pokemon.base?.Defense}</p>

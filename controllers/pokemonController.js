@@ -1,8 +1,19 @@
 const data = require("../data.json");
 
-const getPokemons = (req, res) => {
+/* const getPokemons = (req, res) => {
   res.send(data);
+}; */
+const getPokemons = (req, res) => {
+  const { limit = 20, skip = 0 } = req.query;
+  console.log(req.query)
+  const startIndex = parseInt(skip);
+  const endIndex = startIndex + parseInt(limit);
+  const paginatedData = data.slice(startIndex, endIndex);
+  console.log(limit,skip)
+
+  res.send(paginatedData);
 };
+
 
 const getPokemon = (req, res) => {
   const { id } = req.params;
